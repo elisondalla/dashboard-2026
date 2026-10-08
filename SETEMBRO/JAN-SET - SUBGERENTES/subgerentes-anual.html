@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Subgerentes - Consolidado Anual 2026</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#1a1a1a;color:#fff;font-family:'Segoe UI',Arial,sans-serif;padding:30px 40px}
+h1{text-align:center;font-size:26px;margin-bottom:40px;text-transform:uppercase;letter-spacing:2px;padding-bottom:18px;border-bottom:2px solid #2a2a2a;text-shadow:0 0 25px rgba(59,130,246,.4)}
+.bloco-sub{margin-bottom:70px;padding-bottom:40px;border-bottom:1px dashed #333}
+.page-header{text-align:center;margin-bottom:35px}
+.page-header h2{font-size:28px;text-transform:uppercase;letter-spacing:3px;color:#3b82f6;font-weight:700;margin-bottom:6px;text-shadow:0 0 25px rgba(59,130,246,.5)}
+.page-header .sub{font-size:12px;color:#888;letter-spacing:4px;text-transform:uppercase}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1300px;margin:0 auto 40px auto}
+.kpi-card{background:linear-gradient(135deg,#252525 0%,#1f1f1f 100%);border-radius:12px;padding:22px;border-left:4px solid #3b82f6;box-shadow:0 4px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05),0 0 25px rgba(59,130,246,.15)}
+.kpi-card.verde{border-left-color:#22c55e;box-shadow:0 4px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05),0 0 25px rgba(34,197,94,.15)}
+.kpi-card.amarelo{border-left-color:#eab308;box-shadow:0 4px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05),0 0 25px rgba(234,179,8,.15)}
+.kpi-card.vermelho{border-left-color:#ef4444;box-shadow:0 4px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05),0 0 25px rgba(239,68,68,.15)}
+.kpi-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#888;margin-bottom:8px}
+.kpi-valor{font-size:32px;font-weight:700;color:#fff;line-height:1}
+.kpi-detalhe{font-size:12px;color:#666;margin-top:6px}
+.chart-container{width:100%;max-width:1300px;margin:0 auto 30px auto;background:linear-gradient(135deg,#232323 0%,#1c1c1c 100%);padding:22px;border-radius:14px;box-shadow:0 6px 20px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.04),0 0 30px rgba(59,130,246,.08)}
+.chart-container.preventiva{box-shadow:0 6px 20px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.04),0 0 30px rgba(239,68,68,.08)}
+h3{text-align:center;font-size:14px;margin-bottom:20px;text-transform:uppercase;letter-spacing:2px;font-weight:700}
+h3.corretivas{color:#3b82f6;text-shadow:0 0 18px rgba(59,130,246,.5)}
+h3.preventivas{color:#ef4444;text-shadow:0 0 18px rgba(239,68,68,.5)}
+.section-divider{max-width:1300px;margin:50px auto 28px auto;padding-bottom:12px;border-bottom:2px solid #2a2a2a;display:flex;align-items:center;gap:12px}
+.section-divider h3{font-size:18px;text-transform:uppercase;letter-spacing:3px;font-weight:700;color:#fbbf24;text-shadow:0 0 20px rgba(251,191,36,.5);margin-bottom:0;text-align:left}
+.rank-row{background:linear-gradient(135deg,#252525 0%,#1f1f1f 100%);border-radius:12px;padding:20px 28px;margin-bottom:14px;display:flex;align-items:center;gap:22px;border-left:4px solid #3b82f6;box-shadow:0 4px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.04),0 0 22px rgba(59,130,246,.12)}
+.rank-row.preventiva{border-left-color:#ef4444;box-shadow:0 4px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.04),0 0 22px rgba(239,68,68,.12)}
+.rank-pos{font-size:34px;font-weight:700;min-width:60px;text-align:center;color:#555}
+.rank-pos.ouro{color:#fbbf24;text-shadow:0 0 20px rgba(251,191,36,.7)}
+.rank-pos.prata{color:#c0c0c0;text-shadow:0 0 20px rgba(192,192,192,.6)}
+.rank-pos.bronze{color:#cd7f32;text-shadow:0 0 20px rgba(205,127,50,.6)}
+.rank-nome{font-size:18px;font-weight:700;text-transform:uppercase;min-width:180px}
+.rank-info{display:flex;gap:25px;font-size:13px;color:#ccc;flex-grow:1}
+.rank-info span strong{color:#fff;font-size:15px;margin-right:3px}
+.rank-badge{font-size:15px;font-weight:700;padding:8px 16px;border-radius:30px;min-width:75px;text-align:center}
+.rank-badge.verde{background:rgba(34,197,94,.2);color:#22c55e;border:2px solid #22c55e;box-shadow:0 0 18px rgba(34,197,94,.4)}
+.rank-badge.amarelo{background:rgba(234,179,8,.2);color:#eab308;border:2px solid #eab308;box-shadow:0 0 18px rgba(234,179,8,.4)}
+.rank-badge.vermelho{background:rgba(239,68,68,.2);color:#ef4444;border:2px solid #ef4444;box-shadow:0 0 18px rgba(239,68,68,.4)}
+.ranking-container{max-width:1000px;margin:0 auto}
+.rodape{text-align:center;margin-top:60px;padding-top:25px;border-top:1px solid #2a2a2a;color:#555;font-size:11px;letter-spacing:3px;text-transform:uppercase}
+</style>
+<script>
+window.dados = {
+  cristiano: {
+    nome: 'Cristiano',
+    corr: [['jan/26',500,413],['fev/26',440,388],['mar/26',461,466],['abr/26',415,402],['mai/26',425,444],['jun/26',447,348],['jul/26',533,507],['ago/26',458,468],['set/26',451,399]],
+    prev: [['jan/26',144,115],['fev/26',162,87],['mar/26',143,144],['abr/26',154,143],['mai/26',157,193],['jun/26',107,105],['jul/26',176,157],['ago/26',185,186],['set/26',173,171]]
+  },
+  jamisson: {
+    nome: 'Jamisson',
+    corr: [['jan/26',779,634],['fev/26',674,505],['mar/26',676,573],['abr/26',573,530],['mai/26',630,554],['jun/26',565,515],['jul/26',679,726],['ago/26',570,667],['set/26',1017,955]],
+    prev: [['jan/26',288,300],['fev/26',195,155],['mar/26',329,225],['abr/26',435,192],['mai/26',384,191],['jun/26',423,266],['jul/26',412,812],['ago/26',426,445],['set/26',407,175]]
+  },
+  raoni: {
+    nome: 'Raoni',
+    corr: [['jan/26',385,321],['fev/26',317,356],['mar/26',343,374],['abr/26',361,393],['mai/26',337,333],['jun/26',326,349],['jul/26',426,344],['ago/26',393,448],['set/26',328,334]],
+    prev: [['jan/26',149,151],['fev/26',96,84],['mar/26',79,104],['abr/26',122,97],['mai/26',128,127],['jun/26',109,83],['jul/26',174,169],['ago/26',142,146],['set/26',157,155]]
+  },
+  uriel: {
+    nome: 'Uriel',
+    corr: [['jan/26',611,548],['fev/26',552,413],['mar/26',553,659],['abr/26',587,561],['mai/26',523,438],['jun/26',515,482],['jul/26',483,565],['ago/26',605,539],['set/26',482,452]],
+    prev: [['jan/26',169,173],['fev/26',143,110],['mar/26',155,137],['abr/26',181,172],['mai/26',204,86],['jun/26',209,102],['jul/26',232,313],['ago/26',232,216],['set/26',236,203]]
+  },
+  juverlei: {
+    nome: 'Juverlei',
+    corr: [['jan/26',534,424],['fev/26',377,320],['mar/26',429,483],['abr/26',462,408],['mai/26',348,400],['jun/26',498,375],['jul/26',493,466],['ago/26',461,438],['set/26',403,365]],
+    prev: [['jan/26',142,68],['fev/26',110,86],['mar/26',108,121],['abr/26',127,141],['mai/26',136,122],['jun/26',137,105],['jul/26',196,205],['ago/26',144,154],['set/26',178,122]]
+  },
+  marcos: {
+    nome: 'Marcos',
+    corr: [['jan/26',724,556],['fev/26',551,434],['mar/26',590,542],['abr/26',434,587],['mai/26',587,555],['jun/26',546,496],['jul/26',598,585],['ago/26',489,474],['set/26',423,464]],
+    prev: [['jan/26',154,141],['fev/26',176,131],['mar/26',165,178],['abr/26',163,205],['mai/26',174,138],['jun/26',177,101],['jul/26',216,266],['ago/26',221,174],['set/26',226,238]]
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<h1>📊 Subgerentes - Consolidado Anual 2026</h1>
+
+<div id="conteudo"></div>
+
+<div class="rodape">Dashboard de Chamados • Anual 2026 • Jan a Set</div>
+<script>
+function corPct(p){ if(p>=90) return 'verde'; if(p>=70) return 'amarelo'; return 'vermelho'; }
+function capPct(p){ return p > 100 ? 100 : p; }
+
+function totais(lista){
+  var a=0, f=0;
+  for(var i=0;i<lista.length;i++){ a+=lista[i][1]; f+=lista[i][2]; }
+  return {a:a, f:f, pct: a>0 ? Math.round((f/a)*100) : 0};
+}
+
+function renderKPI(list){
+  var html = '<div class="kpi-grid">';
+  for(var i=0;i<list.length;i++){
+    html += '<div class="kpi-card '+list[i][3]+'"><div class="kpi-label">'+list[i][0]+'</div><div class="kpi-valor">'+list[i][1]+'</div><div class="kpi-detalhe">'+list[i][2]+'</div></div>';
+  }
+  return html+'</div>';
+}
+
+function renderChart(canvasId, lista){
+  var ctx = document.getElementById(canvasId).getContext('2d');
+  var labels = lista.map(function(d){ return d[0]; });
+  var abertos = lista.map(function(d){ return d[1]; });
+  var encerrados = lista.map(function(d){ return d[2]; });
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        { label: 'Abertos', data: abertos, backgroundColor: '#3b82f6', borderRadius: 4 },
+        { label: 'Encerrados', data: encerrados, backgroundColor: '#f97316', borderRadius: 4 }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom', labels: { color: '#fff', padding: 20, font: { size: 13 } } },
+        tooltip: { mode: 'index', intersect: false }
+      },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#333' }, ticks: { color: '#fff' } },
+        x: { grid: { display: false }, ticks: { color: '#fff', font: { size: 11, weight: 'bold' } } }
+      },
+      animation: {
+        onComplete: function() {
+          var ch = this, ctx2 = ch.ctx;
+          ctx2.font = Chart.helpers.fontString(11, 'bold', 'Arial');
+          ctx2.textAlign = 'center'; ctx2.textBaseline = 'bottom'; ctx2.fillStyle = '#fff';
+          ch.data.datasets.forEach(function(ds, i){
+            var meta = ch.getDatasetMeta(i);
+            meta.data.forEach(function(bar, idx){
+              var v = ds.data[idx];
+              if(v > 0) ctx2.fillText(v, bar.x, bar.y - 4);
+            });
+          });
+        }
+      }
+    }
+  });
+}
+
+function renderSubgerente(key){
+  var d = window.dados[key];
+  var tc = totais(d.corr), tp = totais(d.prev);
+  var corrLbl = corPct(tc.pct);
+  var prevLbl = corPct(tp.pct);
+  var starC = tc.pct >= 100 ? ' ⭐' : '';
+  var starP = tp.pct >= 100 ? ' ⭐' : '';
+
+  var html = '<div class="bloco-sub">';
+  html += '<div class="page-header"><h2>👤 '+d.nome+'</h2><div class="sub">Consolidado Anual • Janeiro a Setembro/26</div></div>';
+
+  // CORRETIVAS
+  html += '<div class="section-divider"><h3>🔧 Corretivas — Resumo Anual</h3></div>';
+  html += renderKPI([
+    ['Total Abertos', tc.a.toLocaleString('pt-BR'), 'Jan a Set/26', ''],
+    ['Total Encerrados', tc.f.toLocaleString('pt-BR'), 'Concluídos', 'verde'],
+    ['Saldo', (tc.f-tc.a>=0?'+':'')+(tc.f-tc.a).toLocaleString('pt-BR'), 'Encerrados − Abertos', (tc.f-tc.a>=0?'verde':'vermelho')],
+    ['% Conclusão', capPct(tc.pct)+'%'+starC, 'Meta: 90%', corrLbl]
+  ]);
+  html += '<div class="chart-container"><h3 class="corretivas">📊 Corretivas - Evolução Mensal</h3><canvas id="chart_'+key+'_corr"></canvas></div>';
+
+  // PREVENTIVAS
+  html += '<div class="section-divider"><h3>🛡️ Preventivas — Resumo Anual</h3></div>';
+  html += renderKPI([
+    ['Total Abertos', tp.a.toLocaleString('pt-BR'), 'Jan a Set/26', ''],
+    ['Total Encerrados', tp.f.toLocaleString('pt-BR'), 'Concluídos', 'verde'],
+    ['Saldo', (tp.f-tp.a>=0?'+':'')+(tp.f-tp.a).toLocaleString('pt-BR'), 'Encerrados − Abertos', (tp.f-tp.a>=0?'verde':'vermelho')],
+    ['% Conclusão', capPct(tp.pct)+'%'+starP, 'Meta: 90%', prevLbl]
+  ]);
+  html += '<div class="chart-container preventiva"><h3 class="preventivas">📊 Preventivas - Evolução Mensal</h3><canvas id="chart_'+key+'_prev"></canvas></div>';
+
+  html += '</div>';
+  return html;
+}
+
+function renderRankingFinal(){
+  var rankCorr = [], rankPrev = [];
+  for(var k in window.dados){
+    var tc = totais(window.dados[k].corr);
+    var tp = totais(window.dados[k].prev);
+    rankCorr.push({nome: window.dados[k].nome, a: tc.a, f: tc.f, pct: tc.pct, saldo: tc.f-tc.a});
+    rankPrev.push({nome: window.dados[k].nome, a: tp.a, f: tp.f, pct: tp.pct, saldo: tp.f-tp.a});
+  }
+  rankCorr.sort(function(a,b){ if(b.pct !== a.pct) return b.pct - a.pct; return b.f - a.f; });
+  rankPrev.sort(function(a,b){ if(b.pct !== a.pct) return b.pct - a.pct; return b.f - a.f; });
+
+  function linha(d, i, cls){
+    var pctMostrar = capPct(d.pct);
+    var cor = corPct(pctMostrar);
+    var star = d.pct >= 100 ? ' ⭐' : '';
+    var pos;
+    if(i===0) pos = '<div class="rank-pos ouro">🥇</div>';
+    else if(i===1) pos = '<div class="rank-pos prata">🥈</div>';
+    else if(i===2) pos = '<div class="rank-pos bronze">🥉</div>';
+    else pos = '<div class="rank-pos">'+(i+1)+'º</div>';
+    var saldoStr = (d.saldo >= 0 ? '+' : '') + d.saldo.toLocaleString('pt-BR');
+    var saldoCor = d.saldo >= 0 ? '#22c55e' : '#ef4444';
+    return '<div class="rank-row '+cls+'">'+pos+
+      '<div class="rank-nome">'+d.nome+star+'</div>'+
+      '<div class="rank-info">'+
+        '<span><strong>'+d.a.toLocaleString('pt-BR')+'</strong> Abertos</span>'+
+        '<span><strong>'+d.f.toLocaleString('pt-BR')+'</strong> Encerrados</span>'+
+        '<span><strong style="color:'+saldoCor+'">'+saldoStr+'</strong> Saldo</span>'+
+      '</div>'+
+      '<div class="rank-badge '+cor+'">'+pctMostrar+'%</div></div>';
+  }
+
+  var html = '<div class="bloco-sub" style="border-bottom:none">';
+  html += '<div class="page-header"><h2>🏆 Ranking Anual 2026</h2><div class="sub">Melhores Performance • Janeiro a Setembro/26</div></div>';
+
+  html += '<div class="section-divider"><h3>🔧 Corretivas — Ranking Anual</h3></div>';
+  html += '<div class="ranking-container">';
+  for(var i=0;i<rankCorr.length;i++) html += linha(rankCorr[i], i, '');
+  html += '</div>';
+
+  html += '<div class="section-divider" style="margin-top:60px"><h3>🛡️ Preventivas — Ranking Anual</h3></div>';
+  html += '<div class="ranking-container">';
+  for(var i=0;i<rankPrev.length;i++) html += linha(rankPrev[i], i, 'preventiva');
+  html += '</div>';
+
+  html += '</div>';
+  return html;
+}
+
+(function(){
+  var html = '';
+  ['cristiano','jamisson','raoni','uriel','juverlei','marcos'].forEach(function(k){
+    html += renderSubgerente(k);
+  });
+  html += renderRankingFinal();
+  document.getElementById('conteudo').innerHTML = html;
+
+  ['cristiano','jamisson','raoni','uriel','juverlei','marcos'].forEach(function(k){
+    renderChart('chart_'+k+'_corr', window.dados[k].corr);
+    renderChart('chart_'+k+'_prev', window.dados[k].prev);
+  });
+})();
+</script>
+
+</body>
+</html>

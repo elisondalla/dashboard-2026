@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Juverlei - Setembro/26</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#1a1a1a;color:#fff;font-family:'Segoe UI',Arial,sans-serif;padding:30px 40px}
+.page-header{text-align:center;margin-bottom:35px}
+.page-header h1{font-size:30px;text-transform:uppercase;letter-spacing:4px;color:#3b82f6;font-weight:700;margin-bottom:6px}
+.page-header .sub{font-size:12px;color:#888;letter-spacing:4px;text-transform:uppercase}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;max-width:1300px;margin:0 auto 35px auto}
+.kpi-card{background:linear-gradient(135deg,#252525 0%,#1f1f1f 100%);border-radius:12px;padding:20px;border-left:4px solid #3b82f6;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+.kpi-card.verde{border-left-color:#22c55e}
+.kpi-card.amarelo{border-left-color:#eab308}
+.kpi-card.vermelho{border-left-color:#ef4444}
+.kpi-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#888;margin-bottom:8px}
+.kpi-valor{font-size:32px;font-weight:700;color:#fff;line-height:1}
+.kpi-detalhe{font-size:12px;color:#666;margin-top:6px}
+.section-divider{max-width:1300px;margin:45px auto 25px auto;padding-bottom:12px;border-bottom:2px solid #2a2a2a;display:flex;align-items:center;gap:12px}
+.section-divider h2{font-size:18px;text-transform:uppercase;letter-spacing:3px;font-weight:700}
+.section-divider.corretivas h2{color:#3b82f6}
+.section-divider.preventivas h2{color:#ef4444}
+.bloco{max-width:1300px;margin:0 auto 25px auto}
+.bloco-header{padding:10px 18px;border-radius:8px;margin-bottom:12px;font-weight:600;font-size:14px;display:flex;align-items:center;gap:10px;letter-spacing:1px}
+.bloco-verde{background:rgba(34,197,94,.12);color:#22c55e;border-left:3px solid #22c55e}
+.bloco-amarelo{background:rgba(234,179,8,.12);color:#eab308;border-left:3px solid #eab308}
+.bloco-vermelho{background:rgba(239,68,68,.12);color:#ef4444;border-left:3px solid #ef4444}
+.bloco-contador{margin-left:auto;font-size:12px;background:rgba(255,255,255,.08);padding:3px 12px;border-radius:12px;color:#ccc}
+.tabela{width:100%;background:#202020;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.3);margin-bottom:8px}
+.tabela table{width:100%;border-collapse:collapse}
+.tabela th{background:#2a2a2a;padding:11px 16px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#999;font-weight:600}
+.tabela th.center{text-align:center}
+.tabela td{padding:10px 16px;font-size:13px;border-top:1px solid #2a2a2a}
+.tabela tr:hover{background:#252525}
+.tabela td.center{text-align:center}
+.tabela td.nome{font-weight:600;color:#eee}
+.progress-wrap{display:flex;align-items:center;gap:10px;min-width:110px}
+.progress-bar{flex:1;height:8px;background:#2a2a2a;border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;border-radius:4px}
+.progress-fill.verde{background:#22c55e}
+.progress-fill.amarelo{background:#eab308}
+.progress-fill.vermelho{background:#ef4444}
+.progress-num{font-size:12px;font-weight:700;min-width:38px;text-align:right}
+.progress-num.verde{color:#22c55e}
+.progress-num.amarelo{color:#eab308}
+.progress-num.vermelho{color:#ef4444}
+.rodape{text-align:center;margin-top:50px;padding-top:25px;border-top:1px solid #2a2a2a;color:#555;font-size:11px;letter-spacing:3px;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>👤 Juverlei</h1>
+  <div class="sub">Setembro/26 • Detalhamento por Prestador</div>
+</div>
+
+<div id="conteudo"></div>
+
+<div class="rodape">Dashboard de Chamados • Subgerentes • Setembro/26</div>
+
+<script>
+function corPct(p){ if(p>=90) return 'verde'; if(p>=50) return 'amarelo'; return 'vermelho'; }
+function renderTabela(lista){
+  var html='<div class="tabela"><table><thead><tr><th>Prestador</th><th class="center">Total</th><th class="center">Em Atend.</th><th class="center">Fechados</th><th>Conclusão</th></tr></thead><tbody>';
+  for(var i=0;i<lista.length;i++){
+    var d=lista[i]; var cor=corPct(d[4]);
+    html+='<tr><td class="nome">'+d[0]+'</td><td class="center">'+d[1]+'</td><td class="center">'+d[2]+'</td><td class="center">'+d[3]+'</td>';
+    html+='<td><div class="progress-wrap"><div class="progress-bar"><div class="progress-fill '+cor+'" style="width:'+d[4]+'%"></div></div><span class="progress-num '+cor+'">'+d[4]+'%</span></div></td></tr>';
+  }
+  return html+'</tbody></table></div>';
+}
+function separar(lista){
+  var v=[],a=[],r=[];
+  for(var i=0;i<lista.length;i++){
+    var d=lista[i];
+    if(d[4]>=90) v.push(d);
+    else if(d[4]>=50) a.push(d);
+    else r.push(d);
+  }
+  return {v:v,a:a,r:r};
+}
+function bloco(titulo,cls,lista){
+  if(lista.length===0) return '';
+  var cont=lista.length===1?'1 prestador':lista.length+' prestadores';
+  return '<div class="bloco"><div class="bloco-header '+cls+'">'+titulo+'<span class="bloco-contador">'+cont+'</span></div>'+renderTabela(lista)+'</div>';
+}
+function kpiCard(label,valor,detalhe,cor){
+  return '<div class="kpi-card '+cor+'"><div class="kpi-label">'+label+'</div><div class="kpi-valor">'+valor+'</div><div class="kpi-detalhe">'+detalhe+'</div></div>';
+}
+
+var corr=[['DIEGO ELETROMUNDO ELÉTRICA',109,22,87,80],['LEONARDO PREDIAL',61,25,36,59],['DJA PREDIAL',44,20,24,55],['LEANDRO REGIONAL MANUTENÇÃO',24,5,19,93],['DM SERRALHERIA',22,19,3,14],['MANTEC',20,8,12,81],['CLIMATEC CLIMATIZAÇÃO TIJUCAS',17,3,14,75],['COLDSERV MANUTENÇÃO',13,9,4,75],['AIRTON ESTERAS',11,4,7,75],['JHONATHAN BITTENCOURT REFRIGERAÇÃO',10,0,10,75],['TECLEAN',10,1,9,90],['LUCIANO CADEIRAS',9,3,6,67],['ROLOMATIC BIPS',9,7,2,22],['TIAGO EMBALADORAS',9,3,6,65],['TRANSPOTECH EMPILHADEIRAS BLUMENAU',9,1,8,11],['SAS EMPILHADEIRAS',8,2,6,75],['DIEGO ELETROMUNDO REFRIGERAÇÃO',7,0,7,100],['JUVERLEI SUBGERENTE MANUTENÇÃO',7,7,0,0],['RAFAEL BITTENCOURT REFRIGERAÇÃO',7,0,7,100],['RODRIGO VIDROS',7,1,6,14],['RENOFLEX',6,5,1,17],['CRISTIANO PALETEIRAS CD',5,5,0,0],['NSC EXTRAS',5,5,0,0],['ALEMÃO CALHAS SUL',4,2,2,50],['FROTA BEBEDOUROS',4,0,4,100],['FILIPE ELETROMUNDO ELÉTRICA',3,0,3,100],['PLANEJADOS TIJUCAS',3,3,0,0],['CRISTIANO COLETA CARRINHOS',2,0,2,100],['ELISON PCM',2,0,2,100],['INOVE TRANSPORTES',2,0,2,100],['JOEL GOMES COLETA CARRINHOS',2,2,0,0],['LUCIANO ELETROMUNDO ELÉTRICA',2,0,2,100],['LUCIANO GERADORES',2,0,2,100],['ALEMÃO CALHAS NORTE',1,1,0,0],['GS SERRALHERIA',1,1,0,0],['MARCOS ELETROMUNDO ELÉTRICA',1,0,1,100],['RDL CARRINHOS',1,1,0,0],['TRANSPOTECH EMPILHADEIRAS ITAJAÍ',1,1,0,0]];
+var prev=[['LEANDRO REGIONAL MANUTENÇÃO',29,0,29,100],['CLIMATEC CLIMATIZAÇÃO TIJUCAS',21,10,11,52],['LEONARDO PREDIAL',18,4,14,78],['JHONATHAN BITTENCOURT REFRIGERAÇÃO',13,0,13,100],['RAFAEL BITTENCOURT REFRIGERAÇÃO',12,0,12,100],['DIEGO ELETROMUNDO ELÉTRICA',10,0,10,100],['DIEGO ELETROMUNDO REFRIGERAÇÃO',10,0,10,100],['DJA PREDIAL',10,1,9,90],['RDL CARRINHOS',6,6,0,0],['ALEMÃO CALHAS SUL',5,2,3,60],['JASMIR JARDINAGEM',2,0,2,100],['MANTEC',2,1,1,50],['RUDINEI NOBREAKS',2,0,2,100],['AMANDA PCM',1,0,1,100],['FROTA BEBEDOUROS',1,0,1,100],['NSC EXTRAS',1,0,1,100],['TIAGO EMBALADORAS',1,0,1,100]];
+
+var html='';
+html+='<div class="section-divider corretivas"><h2>🔧 Corretivas</h2></div>';
+html+='<div class="kpi-grid">';
+html+=kpiCard('Total de Chamados',461,'Corretivas em Setembro','');
+html+=kpiCard('Fechados',299,'Concluídos','verde');
+html+=kpiCard('Em Atendimento',162,'Pendentes','amarelo');
+html+=kpiCard('% Conclusão','65%','Meta: 90%','vermelho');
+html+='</div>';
+var c=separar(corr);
+html+=bloco('🏆 Destaques (≥ 90%)','bloco-verde',c.v);
+html+=bloco('⚠️ Atenção (50-89%)','bloco-amarelo',c.a);
+html+=bloco('🚨 Críticos (abaixo de 50%)','bloco-vermelho',c.r);
+
+html+='<div class="section-divider preventivas" style="margin-top:60px"><h2>🛡️ Preventivas</h2></div>';
+html+='<div class="kpi-grid">';
+html+=kpiCard('Total de Chamados',144,'Preventivas em Setembro','');
+html+=kpiCard('Fechados',120,'Concluídos','verde');
+html+=kpiCard('Em Atendimento',24,'Pendentes','amarelo');
+html+=kpiCard('% Conclusão','83%','Meta: 90%','amarelo');
+html+='</div>';
+var p=separar(prev);
+html+=bloco('🏆 Destaques (≥ 90%)','bloco-verde',p.v);
+html+=bloco('⚠️ Atenção (50-89%)','bloco-amarelo',p.a);
+html+=bloco('🚨 Críticos (abaixo de 50%)','bloco-vermelho',p.r);
+
+document.getElementById('conteudo').innerHTML=html;
+</script>
+
+</body>
+</html>

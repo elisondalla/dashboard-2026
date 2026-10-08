@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Conclusões - Anual 2026</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f5f5f7;color:#1a1a1a;font-family:'Segoe UI',Arial,sans-serif;padding:50px 60px;line-height:1.7}
+
+.titulo-principal{text-align:center;margin-bottom:60px;padding-bottom:30px;border-bottom:3px solid #3b82f6}
+.titulo-principal h1{font-size:34px;text-transform:uppercase;letter-spacing:4px;font-weight:700;color:#000;margin-bottom:10px}
+.titulo-principal .sub{font-size:13px;color:#555;letter-spacing:5px;text-transform:uppercase;font-weight:600}
+
+.secao{max-width:1300px;margin:0 auto 60px auto}
+.secao-titulo{font-size:20px;text-transform:uppercase;letter-spacing:3px;font-weight:700;padding:18px 28px;border-radius:10px;margin-bottom:28px;display:flex;align-items:center;gap:15px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.secao-titulo .num{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;font-size:20px;font-weight:700}
+.secao-titulo.verde{background:#e8f8ef;border-left:5px solid #16a34a;color:#14532d}
+.secao-titulo.verde .num{background:#16a34a;color:#fff}
+.secao-titulo.amarelo{background:#fef7e0;border-left:5px solid #ca8a04;color:#713f12}
+.secao-titulo.amarelo .num{background:#ca8a04;color:#fff}
+.secao-titulo.azul{background:#e8f0fe;border-left:5px solid #2563eb;color:#1e3a8a}
+.secao-titulo.azul .num{background:#2563eb;color:#fff}
+
+.card-texto{background:#ffffff;border-radius:12px;padding:24px 30px;margin-bottom:18px;border-left:4px solid #2563eb;box-shadow:0 2px 10px rgba(0,0,0,.08);border-top:1px solid #e5e5e5;border-right:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5}
+.card-texto h4{font-size:15px;text-transform:uppercase;letter-spacing:1.5px;color:#000;margin-bottom:12px;font-weight:700}
+.card-texto p{font-size:15.5px;color:#1a1a1a;line-height:1.8;font-weight:500}
+.card-texto p strong{color:#000;font-weight:700}
+.card-texto.vermelho-card{border-left-color:#dc2626}
+.card-texto.amarelo-card{border-left-color:#ca8a04}
+
+.tabela{width:100%;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.08);border:1px solid #e5e5e5;margin-top:20px}
+.tabela table{width:100%;border-collapse:collapse}
+.tabela th{background:#eef0f4;padding:16px 14px;text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:1.2px;color:#333;font-weight:700;border-bottom:2px solid #d4d4d4}
+.tabela th.center{text-align:center}
+.tabela td{padding:14px 14px;font-size:14.5px;border-top:1px solid #e5e5e5;color:#1a1a1a;font-weight:500}
+.tabela tr:nth-child(even) td{background:#fafafa}
+.tabela tr:hover td{background:#eff6ff}
+.tabela td.center{text-align:center}
+.tabela td.nome{font-weight:700;color:#000}
+.tabela td.positivo{color:#15803d;font-weight:700}
+.tabela td.negativo{color:#b91c1c;font-weight:700}
+.tabela td.amarelo{color:#a16207;font-weight:700}
+
+.destaque-numero{font-size:38px;font-weight:700;color:#000;line-height:1}
+.destaque-label{font-size:11.5px;text-transform:uppercase;letter-spacing:2px;color:#555;margin-bottom:10px;font-weight:700}
+.destaque-sub{font-size:13.5px;color:#444;margin-top:10px;font-weight:500}
+.grid-destaques{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:20px}
+.destaque-card{background:#ffffff;border-radius:12px;padding:24px;border-left:4px solid #2563eb;box-shadow:0 2px 10px rgba(0,0,0,.08);border-top:1px solid #e5e5e5;border-right:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5}
+.destaque-card.verde{border-left-color:#16a34a}
+.destaque-card.vermelho{border-left-color:#dc2626}
+.destaque-card.amarelo{border-left-color:#ca8a04}
+
+.lista-acao{list-style:none;padding:0}
+.lista-acao li{background:#ffffff;border-radius:10px;padding:20px 24px 20px 70px;margin-bottom:14px;position:relative;border-left:4px solid #2563eb;box-shadow:0 2px 10px rgba(0,0,0,.08);font-size:15.5px;color:#1a1a1a;line-height:1.8;font-weight:500;border-top:1px solid #e5e5e5;border-right:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5}
+.lista-acao li::before{content:attr(data-num);position:absolute;left:20px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.lista-acao li strong{color:#000;font-weight:700}
+
+.rodape{text-align:center;margin-top:70px;padding-top:30px;border-top:1px solid #d4d4d4;color:#777;font-size:12px;letter-spacing:3px;text-transform:uppercase;font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="titulo-principal">
+  <h1>Conclusões e Análise Anual</h1>
+  <div class="sub">Subgerentes • Janeiro a Setembro/26</div>
+</div>
+<div class="secao">
+  <div class="secao-titulo azul"><span class="num">1</span> Panorama Geral do Período</div>
+
+  <div class="grid-destaques">
+    <div class="destaque-card">
+      <div class="destaque-label">Corretivas Abertas</div>
+      <div class="destaque-numero">27.725</div>
+      <div class="destaque-sub">Chamados em 9 meses</div>
+    </div>
+    <div class="destaque-card verde">
+      <div class="destaque-label">Corretivas Encerradas</div>
+      <div class="destaque-numero">25.998</div>
+      <div class="destaque-sub">Taxa geral: 94%</div>
+    </div>
+    <div class="destaque-card">
+      <div class="destaque-label">Preventivas Abertas</div>
+      <div class="destaque-numero">10.896</div>
+      <div class="destaque-sub">Chamados em 9 meses</div>
+    </div>
+    <div class="destaque-card amarelo">
+      <div class="destaque-label">Preventivas Encerradas</div>
+      <div class="destaque-numero">9.205</div>
+      <div class="destaque-sub">Taxa geral: 84%</div>
+    </div>
+  </div>
+
+  <div class="card-texto" style="margin-top:25px">
+    <h4>Leitura do Período</h4>
+    <p>A operação processou <strong>mais de 27 mil chamados corretivos</strong> e <strong>quase 11 mil preventivos</strong> em nove meses. A taxa geral de conclusão ficou em <strong>94% em corretivas</strong> e <strong>84% em preventivas</strong>, indicando um desempenho sólido, mas com espaço claro de melhoria nas preventivas.</p>
+  </div>
+</div>
+
+<div class="secao">
+  <div class="secao-titulo verde"><span class="num">2</span> Evoluções Identificadas</div>
+
+  <div class="card-texto">
+    <h4>1. Crescimento das Preventivas em Todos os Subgerentes</h4>
+    <p>Comparando Janeiro com Setembro, <strong>todos os seis subgerentes aumentaram o volume de chamados preventivos</strong>. O crescimento médio foi de aproximadamente <strong>30%</strong> no período. Isso demonstra uma migração consistente do modelo reativo (corretiva) para o proativo (preventiva).</p>
+  </div>
+
+  <div class="card-texto">
+    <h4>2. Redução de Corretivas em Cinco dos Seis Subgerentes</h4>
+    <p>Entre Janeiro e Setembro, <strong>cinco dos seis subgerentes reduziram o volume de corretivas abertas</strong>. MARCOS reduziu 42%, JUVERLEI 25%, URIEL 21%, RAONI 15% e CRISTIANO 10%. Isso sugere que o investimento em preventivas está começando a refletir em menos falhas corretivas.</p>
+  </div>
+
+  <div class="card-texto">
+    <h4>3. Consistência Acima de 90% em Três Subgerentes</h4>
+    <p>No consolidado anual, <strong>três subgerentes mantiveram taxa de conclusão acima de 90% em corretivas</strong>: RAONI, URIEL e CRISTIANO. Mesmo com volumes distintos, a constância ao longo dos nove meses demonstra maturidade operacional.</p>
+  </div>
+</div>
+
+<div class="secao">
+  <div class="secao-titulo amarelo"><span class="num">3</span> Pontos de Atenção</div>
+
+  <div class="card-texto vermelho-card">
+    <h4>1. Concentração de Volume em Um Único Subgerente</h4>
+    <p>O subgerente <strong>JAMISSON</strong> concentrou <strong>6.163 corretivas abertas</strong> no período, aproximadamente <strong>22% de toda a demanda</strong> da operação. Em Setembro isolado, esse volume chegou a <strong>1.017 chamados</strong> em um único mês, o maior registro do ano. Esse acúmulo resultou em um saldo anual negativo de <strong>504 chamados pendentes</strong>.</p>
+  </div>
+
+  <div class="card-texto amarelo-card">
+    <h4>2. Preventivas com Saldo Negativo em Cinco Subgerentes</h4>
+    <p>Dos seis subgerentes, <strong>cinco encerraram o período com saldo negativo em preventivas</strong> (mais chamados abertos do que executados). A situação mais crítica é a do JAMISSON (-538), seguida por URIEL (-249), MARCOS (-158), JUVERLEI (-154) e CRISTIANO (-100). Apenas o RAONI conseguiu manter saldo positivo (+40) na categoria.</p>
+  </div>
+
+  <div class="card-texto vermelho-card">
+    <h4>3. Crescimento de Carga Sem Aumento Proporcional de Capacidade</h4>
+    <p>Em Janeiro a operação processava cerca de <strong>2.500 corretivas por mês</strong>. Em Setembro esse número atingiu <strong>mais de 3.100</strong> — um crescimento de aproximadamente 24% na demanda.</p>
+  </div>
+</div>
+
+<div class="secao">
+  <div class="secao-titulo azul"><span class="num">4</span> Consolidado Anual por Subgerente</div>
+
+  <div class="tabela">
+    <table>
+      <thead>
+        <tr>
+          <th>Subgerente</th>
+          <th class="center">Corretivas</th>
+          <th class="center">Encerradas</th>
+          <th class="center">% Concl.</th>
+          <th class="center">Saldo Corr.</th>
+          <th class="center">Preventivas</th>
+          <th class="center">Encerradas</th>
+          <th class="center">% Concl.</th>
+          <th class="center">Saldo Prev.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="nome">RAONI</td><td class="center">3.216</td><td class="center">3.252</td><td class="center positivo">100%</td><td class="center positivo">+36</td><td class="center">1.156</td><td class="center">1.116</td><td class="center positivo">97%</td><td class="center positivo">+40</td></tr>
+        <tr><td class="nome">URIEL</td><td class="center">4.911</td><td class="center">4.657</td><td class="center positivo">95%</td><td class="center negativo">-254</td><td class="center">1.761</td><td class="center">1.512</td><td class="center amarelo">86%</td><td class="center negativo">-249</td></tr>
+        <tr><td class="nome">MARCOS</td><td class="center">4.942</td><td class="center">4.693</td><td class="center positivo">95%</td><td class="center negativo">-249</td><td class="center">1.549</td><td class="center">1.391</td><td class="center positivo">90%</td><td class="center negativo">-158</td></tr>
+        <tr><td class="nome">CRISTIANO</td><td class="center">4.130</td><td class="center">3.835</td><td class="center positivo">93%</td><td class="center negativo">-295</td><td class="center">1.401</td><td class="center">1.301</td><td class="center positivo">93%</td><td class="center negativo">-100</td></tr>
+        <tr><td class="nome">JUVERLEI</td><td class="center">4.005</td><td class="center">3.679</td><td class="center positivo">92%</td><td class="center negativo">-326</td><td class="center">1.278</td><td class="center">1.124</td><td class="center amarelo">88%</td><td class="center negativo">-154</td></tr>
+        <tr><td class="nome">JAMISSON</td><td class="center">6.163</td><td class="center">5.659</td><td class="center positivo">92%</td><td class="center negativo">-504</td><td class="center">3.299</td><td class="center">2.761</td><td class="center amarelo">84%</td><td class="center negativo">-538</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card-texto" style="margin-top:20px">
+    <h4>Interpretação do Saldo</h4>
+    <p>O saldo representa a diferença entre encerrados e abertos no período. <strong>Saldo positivo</strong> indica que a equipe executou mais do que recebeu, reduzindo pendências acumuladas. <strong>Saldo negativo</strong> indica acúmulo de chamados que migraram para o próximo ciclo.</p>
+  </div>
+</div>
+
+<div class="secao">
+  <div class="secao-titulo verde"><span class="num">5</span> Recomendações</div>
+
+  <ul class="lista-acao">
+    <li data-num="1"><strong>Redistribuição de carga:</strong> avaliar transferência parcial do volume do JAMISSON para equipes com maior capacidade ociosa, equilibrando a operação.</li>
+    <li data-num="2"><strong>Priorização das preventivas atrasadas:</strong> criar força-tarefa para reduzir o saldo negativo de preventivas nos cinco subgerentes, evitando que se tornem corretivas no próximo trimestre.</li>
+    <li data-num="3"><strong>Reforço estrutural:</strong> considerar ampliação do time ou revisão de contratos, dado o crescimento de 24% na demanda sem aumento proporcional de capacidade.</li>
+    <li data-num="4"><strong>Monitoramento mensal do saldo:</strong> transformar o indicador de saldo em métrica obrigatória no acompanhamento mensal, para identificar desvios antes que se acumulem.</li>
+    <li data-num="5"><strong>Metas diferenciadas:</strong> estabelecer metas de conclusão ajustadas ao volume de cada subgerente, evitando comparações diretas entre operações de portes distintos.</li>
+  </ul>
+</div>
+
+<div class="rodape">Dashboard de Chamados • Análise Anual 2026 • Jan a Set</div>
+
+</body>
+</html>

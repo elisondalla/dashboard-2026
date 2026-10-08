@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard de Chamados - 2026</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#1a1a1a;color:#fff;font-family:'Segoe UI',Arial,sans-serif;padding:50px 60px;line-height:1.5}
+
+.titulo-principal{text-align:center;margin-bottom:60px;padding-bottom:30px;border-bottom:3px solid #3b82f6}
+.titulo-principal h1{font-size:34px;text-transform:uppercase;letter-spacing:4px;font-weight:700;color:#fff;margin-bottom:10px;text-shadow:0 0 30px rgba(59,130,246,.5)}
+.titulo-principal .sub{font-size:13px;color:#888;letter-spacing:5px;text-transform:uppercase}
+
+.grupo{margin-bottom:60px;max-width:1400px;margin-left:auto;margin-right:auto}
+.grupo-titulo{font-size:16px;text-transform:uppercase;letter-spacing:3px;font-weight:700;padding:15px 25px;border-radius:10px;margin-bottom:25px;display:flex;align-items:center;gap:15px}
+.grupo-titulo.azul{background:linear-gradient(90deg,rgba(59,130,246,.15),transparent);border-left:5px solid #3b82f6;color:#3b82f6;text-shadow:0 0 15px rgba(59,130,246,.5)}
+.grupo-titulo.verde{background:linear-gradient(90deg,rgba(34,197,94,.15),transparent);border-left:5px solid #22c55e;color:#22c55e;text-shadow:0 0 15px rgba(34,197,94,.5)}
+.grupo-titulo.amarelo{background:linear-gradient(90deg,rgba(234,179,8,.15),transparent);border-left:5px solid #eab308;color:#eab308;text-shadow:0 0 15px rgba(234,179,8,.5)}
+
+.grid{display:grid;gap:18px}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+
+.card{
+  background:linear-gradient(135deg,#252525 0%,#1f1f1f 100%);
+  border-radius:14px;
+  padding:26px 28px;
+  text-decoration:none;
+  color:#fff;
+  border-left:5px solid #3b82f6;
+  box-shadow:0 4px 15px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05),0 0 25px rgba(59,130,246,.12);
+  transition:all .3s ease;
+  display:block;
+}
+.card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 25px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.05),0 0 40px rgba(59,130,246,.35);
+  background:linear-gradient(135deg,#2a2a2a 0%,#232323 100%);
+}
+.card.verde{border-left-color:#22c55e;box-shadow:0 4px 15px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05),0 0 25px rgba(34,197,94,.12)}
+.card.verde:hover{box-shadow:0 8px 25px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.05),0 0 40px rgba(34,197,94,.35)}
+.card.amarelo{border-left-color:#eab308;box-shadow:0 4px 15px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05),0 0 25px rgba(234,179,8,.12)}
+.card.amarelo:hover{box-shadow:0 8px 25px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.05),0 0 40px rgba(234,179,8,.35)}
+.card.vermelho{border-left-color:#ef4444;box-shadow:0 4px 15px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05),0 0 25px rgba(239,68,68,.12)}
+.card.vermelho:hover{box-shadow:0 8px 25px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.05),0 0 40px rgba(239,68,68,.35)}
+.card.roxo{border-left-color:#a855f7;box-shadow:0 4px 15px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05),0 0 25px rgba(168,85,247,.12)}
+.card.roxo:hover{box-shadow:0 8px 25px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.05),0 0 40px rgba(168,85,247,.35)}
+
+.card-titulo{font-size:17px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}
+.card-sub{font-size:12.5px;color:#999;letter-spacing:1px}
+
+.rodape{text-align:center;margin-top:70px;padding-top:30px;border-top:1px solid #2a2a2a;color:#555;font-size:12px;letter-spacing:3px;text-transform:uppercase}
+
+@media (max-width:1100px){
+  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:700px){
+  .grid-4,.grid-3,.grid-2{grid-template-columns:1fr}
+  body{padding:30px 20px}
+}
+</style>
+</head>
+<body>
+
+<div class="titulo-principal">
+  <h1>Dashboard de Chamados</h1>
+  <div class="sub">Consolidado 2026 • Manutenção e Expansão</div>
+</div>
+
+<!-- ==================== ANUAIS (TOPO - DESTAQUE) ==================== -->
+<div class="grupo">
+  <div class="grupo-titulo azul">Consolidados Anuais 2026</div>
+  <div class="grid grid-2">
+    <a class="card" href="JAN-SET%20-%20SUBGERENTES/subgerentes-anual.html">
+      <div class="card-titulo">Ranking Anual — Subgerentes</div>
+      <div class="card-sub">Gráficos mensais + Ranking consolidado (Jan a Set/26)</div>
+    </a>
+    <a class="card verde" href="JAN-SET%20-%20SUBGERENTES/conclusoes-anual.html">
+      <div class="card-titulo">Conclusões e Análise Anual</div>
+      <div class="card-sub">Relatório executivo consolidado (Jan a Set/26)</div>
+    </a>
+  </div>
+</div>
+
+<!-- ==================== REGIONAIS ==================== -->
+<div class="grupo">
+  <div class="grupo-titulo verde">Regionais</div>
+  <div class="grid grid-2">
+    <a class="card verde" href="SETEMBRO%20-%20SUBGERENTES/regionais.html">
+      <div class="card-titulo">Regionais — Evolução Mensal</div>
+      <div class="card-sub">Junho a Setembro/26 • Abas mensais com Corretivas e Preventivas</div>
+    </a>
+    <a class="card verde" href="REGIONAIS%20-%20SETEMBRO/regionais.html">
+      <div class="card-titulo">Regionais — Setembro Detalhado</div>
+      <div class="card-sub">KPIs + Blocos + Ranking (Set/26)</div>
+    </a>
+  </div>
+</div>
+
+<!-- ==================== CATEGORIAS - SETEMBRO ==================== -->
+<div class="grupo">
+  <div class="grupo-titulo amarelo">Categorias — Setembro/26</div>
+  <div class="grid grid-4">
+    <a class="card" href="CLIMATIZA%C3%87%C3%83O%20-%20SETEMBRO/climatizacao.html">
+      <div class="card-titulo">Climatização</div>
+      <div class="card-sub">Corretivas + Preventivas</div>
+    </a>
+    <a class="card amarelo" href="EL%C3%89TRICA%20-%20SETEMBRO/eletrica.html">
+      <div class="card-titulo">Elétrica</div>
+      <div class="card-sub">Corretivas + Preventivas</div>
+    </a>
+    <a class="card amarelo" href="GERADORES%20-%20SETEMBRO/geradores.html">
+      <div class="card-titulo">Geradores</div>
+      <div class="card-sub">Corretivas + Preventivas</div>
+    </a>
+    <a class="card vermelho" href="TELHADOS%20-%20SETEMBRO/telhados.html">
+      <div class="card-titulo">Telhados</div>
+      <div class="card-sub">Corretivas + Preventivas</div>
+    </a>
+    <a class="card" href="REFRIGERA%C3%87%C3%83O%20-%20SETEMBRO/refrigeracao.html">
+      <div class="card-titulo">Refrigeração</div>
+      <div class="card-sub">Corretivas + Preventivas</div>
+    </a>
+    <a class="card verde" href="PREDIAL%20-%20SETEMBRO/predial.html">
+      <div class="card-titulo">Predial</div>
+      <div class="card-sub">Corretivas + Preventivas</div>
+    </a>
+    <a class="card verde" href="PREDIAL%20-%20SETEMBRO/jardim.html">
+      <div class="card-titulo">Jardinagem</div>
+      <div class="card-sub">Preventivas</div>
+    </a>
+    <a class="card roxo" href="SERRALHERIA%20-%20SETEMBRO/serralheria.html">
+      <div class="card-titulo">Serralheria</div>
+      <div class="card-sub">Corretivas</div>
+    </a>
+  </div>
+</div>
+
+<!-- ==================== SUBGERENTES - SETEMBRO ==================== -->
+<div class="grupo">
+  <div class="grupo-titulo azul">Subgerentes — Setembro/26</div>
+  <div class="grid grid-4">
+    <a class="card" href="SETEMBRO%20-%20SUBGERENTES/geral.html">
+      <div class="card-titulo">Resultado Geral</div>
+      <div class="card-sub">Todos os subgerentes</div>
+    </a>
+    <a class="card" href="SETEMBRO%20-%20SUBGERENTES/cristiano.html">
+      <div class="card-titulo">Cristiano</div>
+      <div class="card-sub">Detalhamento mensal</div>
+    </a>
+    <a class="card" href="SETEMBRO%20-%20SUBGERENTES/jamisson.html">
+      <div class="card-titulo">Jamisson</div>
+      <div class="card-sub">Detalhamento mensal</div>
+    </a>
+    <a class="card" href="SETEMBRO%20-%20SUBGERENTES/raoni.html">
+      <div class="card-titulo">Raoni</div>
+      <div class="card-sub">Detalhamento mensal</div>
+    </a>
+    <a class="card" href="SETEMBRO%20-%20SUBGERENTES/uriel.html">
+      <div class="card-titulo">Uriel</div>
+      <div class="card-sub">Detalhamento mensal</div>
+    </a>
+    <a class="card" href="SETEMBRO%20-%20SUBGERENTES/juverlei.html">
+      <div class="card-titulo">Juverlei</div>
+      <div class="card-sub">Detalhamento mensal</div>
+    </a>
+    <a class="card" href="SETEMBRO%20-%20SUBGERENTES/marcos.html">
+      <div class="card-titulo">Marcos</div>
+      <div class="card-sub">Detalhamento mensal</div>
+    </a>
+  </div>
+</div>
+
+<div class="rodape">Dashboard de Chamados • 2026 • Manutenção e Expansão</div>
+
+</body>
+</html>

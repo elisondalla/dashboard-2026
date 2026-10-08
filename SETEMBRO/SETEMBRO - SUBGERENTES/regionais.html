@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard Regionais - Jun-Set/26</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#1a1a1a;color:#fff;font-family:'Segoe UI',Arial,sans-serif;padding:30px 40px}
+h1{text-align:center;font-size:26px;margin-bottom:25px;text-transform:uppercase;letter-spacing:2px;padding-bottom:18px;border-bottom:2px solid #2a2a2a;text-shadow:0 0 25px rgba(59,130,246,.4)}
+.tabs{display:flex;justify-content:center;gap:10px;margin-bottom:40px;flex-wrap:wrap}
+.tab-btn{background:#252525;color:#fff;border:1px solid #333;padding:11px 22px;cursor:pointer;border-radius:8px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;transition:all .3s;box-shadow:0 3px 8px rgba(0,0,0,.4)}
+.tab-btn:hover{background:#333;box-shadow:0 3px 8px rgba(0,0,0,.4),0 0 15px rgba(59,130,246,.2)}
+.tab-btn.active{background:#3b82f6;border-color:#3b82f6;box-shadow:0 3px 10px rgba(0,0,0,.4),0 0 25px rgba(59,130,246,.5)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.mes-titulo{text-align:center;font-size:22px;text-transform:uppercase;letter-spacing:3px;margin-bottom:28px;color:#fff;font-weight:700;text-shadow:0 0 20px rgba(255,255,255,.3)}
+.ordenacao-container{display:flex;justify-content:center;align-items:center;gap:10px;margin-bottom:25px}
+.ordenacao-label{font-size:12px;color:#888;text-transform:uppercase;letter-spacing:1px}
+.btn-ordem{background:#2a2a2a;color:#fff;border:1px solid #333;padding:8px 16px;cursor:pointer;border-radius:6px;font-size:12px;font-weight:700;text-transform:uppercase;transition:all .2s}
+.btn-ordem:hover{background:#333;box-shadow:0 0 15px rgba(59,130,246,.2)}
+.btn-ordem.ativo{background:#3b82f6;border-color:#3b82f6;box-shadow:0 0 20px rgba(59,130,246,.5)}
+.chart-container{width:100%;max-width:1300px;margin:0 auto 30px auto;background:linear-gradient(135deg,#232323 0%,#1c1c1c 100%);padding:22px;border-radius:14px;box-shadow:0 6px 20px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.04),0 0 30px rgba(59,130,246,.08)}
+.chart-container.preventiva{box-shadow:0 6px 20px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.04),0 0 30px rgba(239,68,68,.08)}
+h2{text-align:center;font-size:14px;margin-bottom:20px;text-transform:uppercase;letter-spacing:2px;font-weight:700}
+h2.corretivas{color:#3b82f6;text-shadow:0 0 18px rgba(59,130,246,.6)}
+h2.preventivas{color:#ef4444;text-shadow:0 0 18px rgba(239,68,68,.6)}
+.rodape{text-align:center;margin-top:60px;padding-top:25px;border-top:1px solid #2a2a2a;color:#555;font-size:11px;letter-spacing:3px;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<h1>📊 Regionais - Junho a Setembro/26</h1>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="abrirAba(event,'todos')">📋 Todos os Meses</button>
+  <button class="tab-btn" onclick="abrirAba(event,'junho')">Junho/26</button>
+  <button class="tab-btn" onclick="abrirAba(event,'julho')">Julho/26</button>
+  <button class="tab-btn" onclick="abrirAba(event,'agosto')">Agosto/26</button>
+  <button class="tab-btn" onclick="abrirAba(event,'setembro')">Setembro/26</button>
+</div>
+
+<!-- ABA TODOS -->
+<div id="todos" class="tab-content active">
+  <div class="mes-titulo">📅 Junho/26</div>
+  <div class="chart-container"><h2 class="corretivas">🔧 Corretivas - Junho/26</h2><canvas id="junhoCorretivasB"></canvas></div>
+  <div class="chart-container preventiva"><h2 class="preventivas">🛡️ Preventivas - Junho/26</h2><canvas id="junhoPreventivasB"></canvas></div>
+  <div class="mes-titulo" style="margin-top:70px">📅 Julho/26</div>
+  <div class="chart-container"><h2 class="corretivas">🔧 Corretivas - Julho/26</h2><canvas id="julhoCorretivasB"></canvas></div>
+  <div class="chart-container preventiva"><h2 class="preventivas">🛡️ Preventivas - Julho/26</h2><canvas id="julhoPreventivasB"></canvas></div>
+  <div class="mes-titulo" style="margin-top:70px">📅 Agosto/26</div>
+  <div class="chart-container"><h2 class="corretivas">🔧 Corretivas - Agosto/26</h2><canvas id="agostoCorretivasB"></canvas></div>
+  <div class="chart-container preventiva"><h2 class="preventivas">🛡️ Preventivas - Agosto/26</h2><canvas id="agostoPreventivasB"></canvas></div>
+  <div class="mes-titulo" style="margin-top:70px">📅 Setembro/26</div>
+  <div class="chart-container"><h2 class="corretivas">🔧 Corretivas - Setembro/26</h2><canvas id="setembroCorretivasB"></canvas></div>
+  <div class="chart-container preventiva"><h2 class="preventivas">🛡️ Preventivas - Setembro/26</h2><canvas id="setembroPreventivasB"></canvas></div>
+</div>
+
+<!-- ABA JUNHO -->
+<div id="junho" class="tab-content">
+  <div class="mes-titulo">📅 Junho/26</div>
+  <div class="ordenacao-container">
+    <span class="ordenacao-label">Ordenar por:</span>
+    <button class="btn-ordem ativo" onclick="mudarOrdem('junho','alfabetica',event)">Alfabética</button>
+    <button class="btn-ordem" onclick="mudarOrdem('junho','taxa',event)">Taxa de Conclusão</button>
+  </div>
+  <div class="chart-container"><h2 class="corretivas">🔧 Corretivas - Junho/26</h2><canvas id="junhoCorretivas"></canvas></div>
+  <div class="chart-container preventiva"><h2 class="preventivas">🛡️ Preventivas - Junho/26</h2><canvas id="junhoPreventivas"></canvas></div>
+</div>
+
+<!-- ABA JULHO -->
+<div id="julho" class="tab-content">
+  <div class="mes-titulo">📅 Julho/26</div>
+  <div class="ordenacao-container">
+    <span class="ordenacao-label">Ordenar por:</span>
+    <button class="btn-ordem ativo" onclick="mudarOrdem('julho','alfabetica',event)">Alfabética</button>
+    <button class="btn-ordem" onclick="mudarOrdem('julho','taxa',event)">Taxa de Conclusão</button>
+  </div>
+  <div class="chart-container"><h2 class="corretivas">🔧 Corretivas - Julho/26</h2><canvas id="julhoCorretivas"></canvas></div>
+  <div class="chart-container preventiva"><h2 class="preventivas">🛡️ Preventivas - Julho/26</h2><canvas id="julhoPreventivas"></canvas></div>
+</div>
+
+<!-- ABA AGOSTO -->
+<div id="agosto" class="tab-content">
+  <div class="mes-titulo">📅 Agosto/26</div>
+  <div class="ordenacao-container">
+    <span class="ordenacao-label">Ordenar por:</span>
+    <button class="btn-ordem ativo" onclick="mudarOrdem('agosto','alfabetica',event)">Alfabética</button>
+    <button class="btn-ordem" onclick="mudarOrdem('agosto','taxa',event)">Taxa de Conclusão</button>
+  </div>
+  <div class="chart-container"><h2 class="corretivas">🔧 Corretivas - Agosto/26</h2><canvas id="agostoCorretivas"></canvas></div>
+  <div class="chart-container preventiva"><h2 class="preventivas">🛡️ Preventivas - Agosto/26</h2><canvas id="agostoPreventivas"></canvas></div>
+</div>
+
+<!-- ABA SETEMBRO -->
+<div id="setembro" class="tab-content">
+  <div class="mes-titulo">📅 Setembro/26</div>
+  <div class="ordenacao-container">
+    <span class="ordenacao-label">Ordenar por:</span>
+    <button class="btn-ordem ativo" onclick="mudarOrdem('setembro','alfabetica',event)">Alfabética</button>
+    <button class="btn-ordem" onclick="mudarOrdem('setembro','taxa',event)">Taxa de Conclusão</button>
+  </div>
+  <div class="chart-container"><h2 class="corretivas">🔧 Corretivas - Setembro/26</h2><canvas id="setembroCorretivas"></canvas></div>
+  <div class="chart-container preventiva"><h2 class="preventivas">🛡️ Preventivas - Setembro/26</h2><canvas id="setembroPreventivas"></canvas></div>
+</div>
+
+<div class="rodape">Dashboard de Chamados • Regionais • Junho a Setembro/26</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+function abrirAba(evt, id) {
+  document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active');});
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById(id).classList.add('active');
+  evt.currentTarget.classList.add('active');
+}
+var bancoDados = {
+  junho:{
+    corretivas:[['ADEMIR',17,5,12,71],['CICERO',35,3,32,91],['DIEGO',22,0,22,100],['EVERTON',32,9,23,72],['LEANDRO',32,10,22,69],['URIEL',19,1,18,95]],
+    preventivas:[['ADEMIR',0,0,0,0],['CICERO',1,0,1,100],['DIEGO',5,0,5,100],['EVERTON',5,5,0,0],['LEANDRO',2,0,2,100],['URIEL',1,1,0,0]]
+  },
+  julho:{
+    corretivas:[['ADEMIR',19,1,18,95],['CICERO',35,0,35,100],['DIEGO',17,6,11,65],['EVERTON',40,14,26,65],['LEANDRO',18,7,11,61],['URIEL',27,5,22,81]],
+    preventivas:[['ADEMIR',13,4,7,54],['CICERO',31,0,31,100],['DIEGO',17,0,17,100],['EVERTON',22,22,0,0],['LEANDRO',22,0,22,100],['URIEL',22,22,0,0]]
+  },
+  agosto:{
+    corretivas:[['ADEMIR',20,2,18,90],['CICERO',30,7,23,76],['DIEGO',23,6,17,74],['EVERTON',28,9,19,68],['JEFFERSON',55,36,19,34],['LEANDRO',26,10,16,61]],
+    preventivas:[['ADEMIR',22,0,22,100],['CICERO',22,1,21,95],['DIEGO',21,3,18,86],['EVERTON',31,20,11,35],['JEFFERSON',4,3,1,25],['LEANDRO',29,2,27,93]]
+  },
+  setembro:{
+    corretivas:[['ADEMIR',30,2,28,93],['CICERO',39,5,34,87],['DIEGO',38,8,30,79],['EVERTON',30,14,16,53],['JEFFERSON',58,45,13,22],['LEANDRO',40,6,34,85]],
+    preventivas:[['ADEMIR',28,0,28,100],['CICERO',22,4,18,82],['DIEGO',18,4,14,78],['EVERTON',23,12,11,48],['JEFFERSON',14,10,4,29],['LEANDRO',30,2,28,93]]
+  }
+};
+var graficos = {};
+var COR_AZUL = '#3b82f6';
+var COR_LARANJA = '#f97316';
+
+function renderChart(idCanvas, lista) {
+  if (graficos[idCanvas]) graficos[idCanvas].destroy();
+  var ctx = document.getElementById(idCanvas).getContext('2d');
+  graficos[idCanvas] = new Chart(ctx, {
+    type:'bar',
+    data:{
+      labels: lista.map(function(d){return [d[0],'('+d[4]+'%)'];}),
+      datasets:[
+        {label:'Abertos',data:lista.map(function(d){return d[1];}),backgroundColor:COR_AZUL,borderRadius:4},
+        {label:'Encerrados',data:lista.map(function(d){return d[3];}),backgroundColor:COR_LARANJA,borderRadius:4}
+      ]
+    },
+    options:{
+      responsive:true,
+      plugins:{
+        legend:{position:'bottom',labels:{color:'#fff',padding:20,font:{size:13}}},
+        tooltip:{mode:'index',intersect:false}
+      },
+      scales:{
+        y:{beginAtZero:true,grid:{color:'#333'},ticks:{color:'#fff',stepSize:5}},
+        x:{grid:{display:false},ticks:{color:'#fff',font:{size:11,weight:'bold'}}}
+      },
+      animation:{
+        onComplete:function(){
+          var ch=this, ctx2=ch.ctx;
+          ctx2.font=Chart.helpers.fontString(12,'bold','Arial');
+          ctx2.textAlign='center'; ctx2.textBaseline='bottom'; ctx2.fillStyle='#fff';
+          ch.data.datasets.forEach(function(ds,i){
+            var meta=ch.getDatasetMeta(i);
+            meta.data.forEach(function(bar,idx){
+              var v=ds.data[idx];
+              if(v>0) ctx2.fillText(v,bar.x,bar.y-4);
+            });
+          });
+        }
+      }
+    }
+  });
+}
+
+function atualizarMes(mes, tipoOrdem) {
+  ['corretivas','preventivas'].forEach(function(tipo){
+    var lista = bancoDados[mes][tipo].slice();
+    if (tipoOrdem==='taxa') {
+      lista.sort(function(a,b){ if(b[4]!==a[4]) return b[4]-a[4]; return a[0].localeCompare(b[0]); });
+    } else {
+      lista.sort(function(a,b){ return a[0].localeCompare(b[0]); });
+    }
+    var suf = tipo==='corretivas' ? 'Corretivas' : 'Preventivas';
+    if (document.getElementById(mes+suf)) renderChart(mes+suf, lista);
+    if (document.getElementById(mes+suf+'B')) renderChart(mes+suf+'B', lista);
+  });
+}
+
+function mudarOrdem(mes, tipo, evt) {
+  var btns = evt.currentTarget.parentElement.querySelectorAll('.btn-ordem');
+  btns.forEach(function(b){b.classList.remove('ativo');});
+  evt.currentTarget.classList.add('ativo');
+  atualizarMes(mes, tipo);
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  ['junho','julho','agosto','setembro'].forEach(function(m){ atualizarMes(m,'alfabetica'); });
+});
+</script>
+
+</body>
+</html>

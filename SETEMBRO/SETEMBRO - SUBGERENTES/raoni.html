@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Raoni - Setembro/26</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#1a1a1a;color:#fff;font-family:'Segoe UI',Arial,sans-serif;padding:30px 40px}
+.page-header{text-align:center;margin-bottom:35px}
+.page-header h1{font-size:30px;text-transform:uppercase;letter-spacing:4px;color:#3b82f6;font-weight:700;margin-bottom:6px}
+.page-header .sub{font-size:12px;color:#888;letter-spacing:4px;text-transform:uppercase}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;max-width:1300px;margin:0 auto 35px auto}
+.kpi-card{background:linear-gradient(135deg,#252525 0%,#1f1f1f 100%);border-radius:12px;padding:20px;border-left:4px solid #3b82f6;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+.kpi-card.verde{border-left-color:#22c55e}
+.kpi-card.amarelo{border-left-color:#eab308}
+.kpi-card.vermelho{border-left-color:#ef4444}
+.kpi-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#888;margin-bottom:8px}
+.kpi-valor{font-size:32px;font-weight:700;color:#fff;line-height:1}
+.kpi-detalhe{font-size:12px;color:#666;margin-top:6px}
+.section-divider{max-width:1300px;margin:45px auto 25px auto;padding-bottom:12px;border-bottom:2px solid #2a2a2a;display:flex;align-items:center;gap:12px}
+.section-divider h2{font-size:18px;text-transform:uppercase;letter-spacing:3px;font-weight:700}
+.section-divider.corretivas h2{color:#3b82f6}
+.section-divider.preventivas h2{color:#ef4444}
+.bloco{max-width:1300px;margin:0 auto 25px auto}
+.bloco-header{padding:10px 18px;border-radius:8px;margin-bottom:12px;font-weight:600;font-size:14px;display:flex;align-items:center;gap:10px;letter-spacing:1px}
+.bloco-verde{background:rgba(34,197,94,.12);color:#22c55e;border-left:3px solid #22c55e}
+.bloco-amarelo{background:rgba(234,179,8,.12);color:#eab308;border-left:3px solid #eab308}
+.bloco-vermelho{background:rgba(239,68,68,.12);color:#ef4444;border-left:3px solid #ef4444}
+.bloco-contador{margin-left:auto;font-size:12px;background:rgba(255,255,255,.08);padding:3px 12px;border-radius:12px;color:#ccc}
+.tabela{width:100%;background:#202020;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.3);margin-bottom:8px}
+.tabela table{width:100%;border-collapse:collapse}
+.tabela th{background:#2a2a2a;padding:11px 16px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#999;font-weight:600}
+.tabela th.center{text-align:center}
+.tabela td{padding:10px 16px;font-size:13px;border-top:1px solid #2a2a2a}
+.tabela tr:hover{background:#252525}
+.tabela td.center{text-align:center}
+.tabela td.nome{font-weight:600;color:#eee}
+.progress-wrap{display:flex;align-items:center;gap:10px;min-width:110px}
+.progress-bar{flex:1;height:8px;background:#2a2a2a;border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;border-radius:4px}
+.progress-fill.verde{background:#22c55e}
+.progress-fill.amarelo{background:#eab308}
+.progress-fill.vermelho{background:#ef4444}
+.progress-num{font-size:12px;font-weight:700;min-width:38px;text-align:right}
+.progress-num.verde{color:#22c55e}
+.progress-num.amarelo{color:#eab308}
+.progress-num.vermelho{color:#ef4444}
+.rodape{text-align:center;margin-top:50px;padding-top:25px;border-top:1px solid #2a2a2a;color:#555;font-size:11px;letter-spacing:3px;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>👤 Raoni</h1>
+  <div class="sub">Setembro/26 • Detalhamento por Prestador</div>
+</div>
+
+<div id="conteudo"></div>
+
+<div class="rodape">Dashboard de Chamados • Subgerentes • Setembro/26</div>
+
+<script>
+function corPct(p){ if(p>=90) return 'verde'; if(p>=50) return 'amarelo'; return 'vermelho'; }
+function renderTabela(lista){
+  var html='<div class="tabela"><table><thead><tr><th>Prestador</th><th class="center">Total</th><th class="center">Em Atend.</th><th class="center">Fechados</th><th>Conclusão</th></tr></thead><tbody>';
+  for(var i=0;i<lista.length;i++){
+    var d=lista[i]; var cor=corPct(d[4]);
+    html+='<tr><td class="nome">'+d[0]+'</td><td class="center">'+d[1]+'</td><td class="center">'+d[2]+'</td><td class="center">'+d[3]+'</td>';
+    html+='<td><div class="progress-wrap"><div class="progress-bar"><div class="progress-fill '+cor+'" style="width:'+d[4]+'%"></div></div><span class="progress-num '+cor+'">'+d[4]+'%</span></div></td></tr>';
+  }
+  return html+'</tbody></table></div>';
+}
+function separar(lista){
+  var v=[],a=[],r=[];
+  for(var i=0;i<lista.length;i++){
+    var d=lista[i];
+    if(d[4]>=90) v.push(d);
+    else if(d[4]>=50) a.push(d);
+    else r.push(d);
+  }
+  return {v:v,a:a,r:r};
+}
+function bloco(titulo,cls,lista){
+  if(lista.length===0) return '';
+  var cont=lista.length===1?'1 prestador':lista.length+' prestadores';
+  return '<div class="bloco"><div class="bloco-header '+cls+'">'+titulo+'<span class="bloco-contador">'+cont+'</span></div>'+renderTabela(lista)+'</div>';
+}
+function kpiCard(label,valor,detalhe,cor){
+  return '<div class="kpi-card '+cor+'"><div class="kpi-label">'+label+'</div><div class="kpi-valor">'+valor+'</div><div class="kpi-detalhe">'+detalhe+'</div></div>';
+}
+
+var corr=[['TRANSPOTECH EMPILHADEIRAS JOINVILLE',17,0,17,100],['ELOS TECH REFRIGERAÇÃO',13,0,13,100],['MACFRIO REFRIGERAÇÃO',9,0,9,100],['LUCRIFRIO CLIMATIZAÇÃO JOINVILLE',4,0,4,100],['WOLF REFRIGERAÇÃO',3,0,3,100],['FROTA BEBEDOUROS',2,0,2,100],['NSC EXTRAS',2,0,2,100],['GS PORTA PALETES',1,0,1,100],['LUCIANO GERADORES',1,0,1,100],['MARCOS ELETROMUNDO ELÉTRICA',1,0,1,100],['TIAGO NEHRING',1,0,1,100],['DOLIRO PREDIAL',65,3,62,95],['LUCIANO ELETROMUNDO ELÉTRICA',76,7,69,91],['TIAGO EMBALADORAS',8,1,7,88],['RENOFLEX',7,1,6,86],['DIEGO REGIONAL MANUTENÇÃO',18,3,15,83],['VALDIR LIMA PREDIAL',28,6,22,79],['ALEMÃO CALHAS NORTE',4,1,3,75],['TECLEAN',14,5,9,64],['SAS EMPILHADEIRAS',10,4,6,60],['RODRIGO VIDROS',5,2,3,60],['DOLIRO SERRALHERIA',8,4,4,50],['AIRTON ESTERAS',2,1,1,50],['RAONI SUBGERENTE MANUTENÇÃO',3,2,1,33],['ROLOMATIC BIPS',3,2,1,33],['COLDSERV MANUTENÇÃO',12,9,3,25],['MANTEC',3,3,0,0],['PLANEJADOS TIJUCAS',3,3,0,0],['CRISTIANO PALETEIRAS CD',2,2,0,0],['TIJUELETRO ELÉTRICA',1,1,0,0]];
+var prev=[['LUCRIFRIO CLIMATIZAÇÃO JOINVILLE',31,0,31,100],['ELOS TECH REFRIGERAÇÃO',20,0,20,100],['DOLIRO PREDIAL',17,0,17,100],['WOLF REFRIGERAÇÃO',12,0,12,100],['RAONI SUBGERENTE MANUTENÇÃO',9,0,9,100],['LENO COLETA CARRINHOS',6,0,6,100],['MACFRIO REFRIGERAÇÃO',4,0,4,100],['VALDIR LIMA PREDIAL',3,0,3,100],['ISRAEL JARDIM',16,1,15,94],['DIEGO REGIONAL MANUTENÇÃO',17,2,15,88],['RDL CARRINHOS',16,8,8,50],['ALEMÃO CALHAS NORTE',2,1,1,50],['MATEUS PCM',2,2,0,0],['RUDINEI NOBREAKS',2,2,0,0]];
+
+var html='';
+html+='<div class="section-divider corretivas"><h2>🔧 Corretivas</h2></div>';
+html+='<div class="kpi-grid">';
+html+=kpiCard('Total de Chamados',326,'Corretivas em Setembro','');
+html+=kpiCard('Fechados',266,'Concluídos','verde');
+html+=kpiCard('Em Atendimento',60,'Pendentes','amarelo');
+html+=kpiCard('% Conclusão','82%','Meta: 90%','amarelo');
+html+='</div>';
+var c=separar(corr);
+html+=bloco('🏆 Destaques (≥ 90%)','bloco-verde',c.v);
+html+=bloco('⚠️ Atenção (50-89%)','bloco-amarelo',c.a);
+html+=bloco('🚨 Críticos (abaixo de 50%)','bloco-vermelho',c.r);
+
+html+='<div class="section-divider preventivas" style="margin-top:60px"><h2>🛡️ Preventivas</h2></div>';
+html+='<div class="kpi-grid">';
+html+=kpiCard('Total de Chamados',157,'Preventivas em Setembro','');
+html+=kpiCard('Fechados',141,'Concluídos','verde');
+html+=kpiCard('Em Atendimento',16,'Pendentes','amarelo');
+html+=kpiCard('% Conclusão','90%','Meta: 90%','verde');
+html+='</div>';
+var p=separar(prev);
+html+=bloco('🏆 Destaques (≥ 90%)','bloco-verde',p.v);
+html+=bloco('⚠️ Atenção (50-89%)','bloco-amarelo',p.a);
+html+=bloco('🚨 Críticos (abaixo de 50%)','bloco-vermelho',p.r);
+
+document.getElementById('conteudo').innerHTML=html;
+</script>
+
+</body>
+</html>

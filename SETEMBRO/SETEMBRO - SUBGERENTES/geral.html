@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Subgerentes - Setembro/26</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#1a1a1a;color:#fff;font-family:'Segoe UI',Arial,sans-serif;padding:25px 30px}
+
+h1{text-align:center;font-size:26px;margin-bottom:25px;text-transform:uppercase;letter-spacing:2px;padding-bottom:18px;border-bottom:2px solid #2a2a2a;color:#fff;text-shadow:0 0 25px rgba(59,130,246,.4)}
+
+.tabs{display:flex;justify-content:center;gap:10px;margin-bottom:40px;flex-wrap:wrap}
+.tab-btn{background:#252525;color:#fff;border:1px solid #333;padding:11px 24px;cursor:pointer;border-radius:8px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;transition:all .3s;box-shadow:0 3px 8px rgba(0,0,0,.4)}
+.tab-btn:hover{background:#333;box-shadow:0 3px 8px rgba(0,0,0,.4),0 0 15px rgba(59,130,246,.2)}
+.tab-btn.active{background:#3b82f6;border-color:#3b82f6;box-shadow:0 3px 10px rgba(0,0,0,.4),0 0 25px rgba(59,130,246,.5)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+.header-resumo{text-align:center;margin-bottom:35px;padding-bottom:22px;border-bottom:3px solid #3b82f6}
+.header-resumo h2{font-size:28px;text-transform:uppercase;letter-spacing:3px;margin-bottom:5px;color:#fff}
+.header-resumo .subtitulo{font-size:13px;color:#aaa;letter-spacing:4px;text-transform:uppercase}
+
+.grid-principal{display:grid;grid-template-columns:1fr 1fr;gap:35px;max-width:1400px;margin:0 auto}
+
+.secao-titulo{font-size:16px;text-transform:uppercase;letter-spacing:2px;text-align:center;padding:12px;border-radius:10px;margin-bottom:20px;font-weight:700}
+.secao-corretivas{background:rgba(59,130,246,.12);color:#3b82f6;border:1px solid rgba(59,130,246,.4);box-shadow:0 0 25px rgba(59,130,246,.15)}
+.secao-preventivas{background:rgba(239,68,68,.12);color:#ef4444;border:1px solid rgba(239,68,68,.4);box-shadow:0 0 25px rgba(239,68,68,.15)}
+
+.card{
+  background:linear-gradient(135deg,#252525 0%,#1f1f1f 100%);
+  border-radius:12px;
+  padding:16px 20px;
+  margin-bottom:14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  border-left:4px solid #3b82f6;
+  box-shadow:0 4px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.04),0 0 22px rgba(59,130,246,.12);
+  transition:all .3s ease;
+}
+.card:hover{box-shadow:0 4px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.04),0 0 32px rgba(59,130,246,.3)}
+.card.preventiva{border-left-color:#ef4444;box-shadow:0 4px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.04),0 0 22px rgba(239,68,68,.12)}
+.card.preventiva:hover{box-shadow:0 4px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.04),0 0 32px rgba(239,68,68,.3)}
+
+.card-nome{font-size:16px;font-weight:700;text-transform:uppercase;min-width:120px}
+.card-info{display:flex;gap:22px;font-size:13px;color:#ccc;flex-grow:1}
+.card-info span strong{color:#fff;font-size:15px;margin-right:3px}
+
+.badge{font-size:15px;font-weight:700;padding:8px 16px;border-radius:30px;min-width:75px;text-align:center}
+.badge-verde{background:rgba(34,197,94,.2);color:#22c55e;border:2px solid #22c55e;box-shadow:0 0 18px rgba(34,197,94,.4)}
+.badge-amarelo{background:rgba(234,179,8,.2);color:#eab308;border:2px solid #eab308;box-shadow:0 0 18px rgba(234,179,8,.4)}
+.badge-vermelho{background:rgba(239,68,68,.2);color:#ef4444;border:2px solid #ef4444;box-shadow:0 0 18px rgba(239,68,68,.4)}
+
+.rodape{text-align:center;margin-top:60px;padding-top:25px;border-top:1px solid #2a2a2a;color:#555;font-size:11px;letter-spacing:3px;text-transform:uppercase}
+
+.ranking-container{max-width:900px;margin:0 auto}
+.rank-row{
+  background:linear-gradient(135deg,#252525 0%,#1f1f1f 100%);
+  border-radius:12px;
+  padding:20px 28px;
+  margin-bottom:14px;
+  display:flex;
+  align-items:center;
+  gap:22px;
+  border-left:4px solid #3b82f6;
+  box-shadow:0 4px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.04),0 0 22px rgba(59,130,246,.12);
+  transition:all .3s ease;
+}
+.rank-row:hover{box-shadow:0 4px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.04),0 0 32px rgba(59,130,246,.3)}
+.rank-row.preventiva{border-left-color:#ef4444;box-shadow:0 4px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.04),0 0 22px rgba(239,68,68,.12)}
+.rank-row.preventiva:hover{box-shadow:0 4px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.04),0 0 32px rgba(239,68,68,.3)}
+.rank-pos{font-size:34px;font-weight:700;min-width:60px;text-align:center;color:#555}
+.rank-pos.ouro{color:#fbbf24;text-shadow:0 0 20px rgba(251,191,36,.7)}
+.rank-pos.prata{color:#c0c0c0;text-shadow:0 0 20px rgba(192,192,192,.6)}
+.rank-pos.bronze{color:#cd7f32;text-shadow:0 0 20px rgba(205,127,50,.6)}
+.rank-nome{font-size:20px;font-weight:700;text-transform:uppercase;min-width:180px}
+.rank-info{display:flex;gap:25px;font-size:14px;color:#ccc;flex-grow:1}
+.rank-info span strong{color:#fff;font-size:16px;margin-right:3px}
+</style>
+<script>
+function abrirAba(evt, id) {
+  document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active');});
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById(id).classList.add('active');
+  evt.currentTarget.classList.add('active');
+}
+</script>
+</head>
+<body>
+
+<h1>📊 Subgerentes - Setembro/26</h1>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="abrirAba(event,'geral')">📋 Resultado Geral</button>
+  <button class="tab-btn" onclick="abrirAba(event,'ranking')">🏆 Ranking</button>
+</div>
+
+<div id="geral" class="tab-content active">
+  <div class="header-resumo">
+    <h2>📅 Setembro/26</h2>
+    <div class="subtitulo">Relatório de Subgerentes • Ordenado por % de Conclusão</div>
+  </div>
+  <div class="grid-principal">
+    <div>
+      <div class="secao-titulo secao-corretivas">🔧 Corretivas (maior % → menor %)</div>
+      <div class="card"><div class="card-nome">Raoni</div><div class="card-info"><span><strong>326</strong> Total</span><span><strong>60</strong> Atend.</span><span><strong>266</strong> Fech.</span></div><div class="badge badge-amarelo">82%</div></div>
+      <div class="card"><div class="card-nome">Jamisson</div><div class="card-info"><span><strong>1.016</strong> Total</span><span><strong>247</strong> Atend.</span><span><strong>769</strong> Fech.</span></div><div class="badge badge-amarelo">76%</div></div>
+      <div class="card"><div class="card-nome">Marcos</div><div class="card-info"><span><strong>489</strong> Total</span><span><strong>125</strong> Atend.</span><span><strong>364</strong> Fech.</span></div><div class="badge badge-amarelo">75%</div></div>
+      <div class="card"><div class="card-nome">Cristiano</div><div class="card-info"><span><strong>451</strong> Total</span><span><strong>117</strong> Atend.</span><span><strong>334</strong> Fech.</span></div><div class="badge badge-amarelo">74%</div></div>
+      <div class="card"><div class="card-nome">Uriel</div><div class="card-info"><span><strong>482</strong> Total</span><span><strong>134</strong> Atend.</span><span><strong>348</strong> Fech.</span></div><div class="badge badge-amarelo">72%</div></div>
+      <div class="card"><div class="card-nome">Juverlei</div><div class="card-info"><span><strong>461</strong> Total</span><span><strong>162</strong> Atend.</span><span><strong>299</strong> Fech.</span></div><div class="badge badge-vermelho">65%</div></div>
+    </div>
+    <div>
+      <div class="secao-titulo secao-preventivas">🛡️ Preventivas (maior % → menor %)</div>
+      <div class="card preventiva"><div class="card-nome">Raoni</div><div class="card-info"><span><strong>157</strong> Total</span><span><strong>16</strong> Atend.</span><span><strong>141</strong> Fech.</span></div><div class="badge badge-verde">90%</div></div>
+      <div class="card preventiva"><div class="card-nome">Cristiano</div><div class="card-info"><span><strong>173</strong> Total</span><span><strong>19</strong> Atend.</span><span><strong>154</strong> Fech.</span></div><div class="badge badge-verde">89%</div></div>
+      <div class="card preventiva"><div class="card-nome">Jamisson</div><div class="card-info"><span><strong>407</strong> Total</span><span><strong>58</strong> Atend.</span><span><strong>349</strong> Fech.</span></div><div class="badge badge-verde">86%</div></div>
+      <div class="card preventiva"><div class="card-nome">Juverlei</div><div class="card-info"><span><strong>144</strong> Total</span><span><strong>24</strong> Atend.</span><span><strong>120</strong> Fech.</span></div><div class="badge badge-amarelo">83%</div></div>
+      <div class="card preventiva"><div class="card-nome">Marcos</div><div class="card-info"><span><strong>221</strong> Total</span><span><strong>62</strong> Atend.</span><span><strong>159</strong> Fech.</span></div><div class="badge badge-amarelo">72%</div></div>
+      <div class="card preventiva"><div class="card-nome">Uriel</div><div class="card-info"><span><strong>232</strong> Total</span><span><strong>26</strong> Atend.</span><span><strong>118</strong> Fech.</span></div><div class="badge badge-vermelho">51%</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="ranking" class="tab-content">
+  <div class="header-resumo">
+    <h2>🏆 Ranking do Mês</h2>
+    <div class="subtitulo">Setembro/26 • Melhores Performance</div>
+  </div>
+  <div class="ranking-container">
+    <div class="secao-titulo secao-corretivas">🔧 Corretivas</div>
+    <div class="rank-row"><div class="rank-pos ouro">🥇</div><div class="rank-nome">Raoni</div><div class="rank-info"><span><strong>326</strong> Total</span><span><strong>266</strong> Fech.</span><span><strong>60</strong> Atend.</span></div><div class="badge badge-amarelo">82%</div></div>
+    <div class="rank-row"><div class="rank-pos prata">🥈</div><div class="rank-nome">Jamisson</div><div class="rank-info"><span><strong>1.016</strong> Total</span><span><strong>769</strong> Fech.</span><span><strong>247</strong> Atend.</span></div><div class="badge badge-amarelo">76%</div></div>
+    <div class="rank-row"><div class="rank-pos bronze">🥉</div><div class="rank-nome">Marcos</div><div class="rank-info"><span><strong>489</strong> Total</span><span><strong>364</strong> Fech.</span><span><strong>125</strong> Atend.</span></div><div class="badge badge-amarelo">75%</div></div>
+    <div class="rank-row"><div class="rank-pos">4º</div><div class="rank-nome">Cristiano</div><div class="rank-info"><span><strong>451</strong> Total</span><span><strong>334</strong> Fech.</span><span><strong>117</strong> Atend.</span></div><div class="badge badge-amarelo">74%</div></div>
+    <div class="rank-row"><div class="rank-pos">5º</div><div class="rank-nome">Uriel</div><div class="rank-info"><span><strong>482</strong> Total</span><span><strong>348</strong> Fech.</span><span><strong>134</strong> Atend.</span></div><div class="badge badge-amarelo">72%</div></div>
+    <div class="rank-row"><div class="rank-pos">6º</div><div class="rank-nome">Juverlei</div><div class="rank-info"><span><strong>461</strong> Total</span><span><strong>299</strong> Fech.</span><span><strong>162</strong> Atend.</span></div><div class="badge badge-vermelho">65%</div></div>
+
+    <div class="secao-titulo secao-preventivas" style="margin-top:45px">🛡️ Preventivas</div>
+    <div class="rank-row preventiva"><div class="rank-pos ouro">🥇</div><div class="rank-nome">Raoni</div><div class="rank-info"><span><strong>157</strong> Total</span><span><strong>141</strong> Fech.</span><span><strong>16</strong> Atend.</span></div><div class="badge badge-verde">90%</div></div>
+    <div class="rank-row preventiva"><div class="rank-pos prata">🥈</div><div class="rank-nome">Cristiano</div><div class="rank-info"><span><strong>173</strong> Total</span><span><strong>154</strong> Fech.</span><span><strong>19</strong> Atend.</span></div><div class="badge badge-verde">89%</div></div>
+    <div class="rank-row preventiva"><div class="rank-pos bronze">🥉</div><div class="rank-nome">Jamisson</div><div class="rank-info"><span><strong>407</strong> Total</span><span><strong>349</strong> Fech.</span><span><strong>58</strong> Atend.</span></div><div class="badge badge-verde">86%</div></div>
+    <div class="rank-row preventiva"><div class="rank-pos">4º</div><div class="rank-nome">Juverlei</div><div class="rank-info"><span><strong>144</strong> Total</span><span><strong>120</strong> Fech.</span><span><strong>24</strong> Atend.</span></div><div class="badge badge-amarelo">83%</div></div>
+    <div class="rank-row preventiva"><div class="rank-pos">5º</div><div class="rank-nome">Marcos</div><div class="rank-info"><span><strong>221</strong> Total</span><span><strong>159</strong> Fech.</span><span><strong>62</strong> Atend.</span></div><div class="badge badge-amarelo">72%</div></div>
+    <div class="rank-row preventiva"><div class="rank-pos">6º</div><div class="rank-nome">Uriel</div><div class="rank-info"><span><strong>232</strong> Total</span><span><strong>118</strong> Fech.</span><span><strong>26</strong> Atend.</span></div><div class="badge badge-vermelho">51%</div></div>
+  </div>
+</div>
+
+<div class="rodape">Dashboard de Chamados • Subgerentes • Setembro/26</div>
+
+</body>
+</html>

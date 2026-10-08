@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Cristiano - Setembro/26</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#1a1a1a;color:#fff;font-family:'Segoe UI',Arial,sans-serif;padding:30px 40px}
+
+/* Header */
+.page-header{text-align:center;margin-bottom:35px}
+.page-header h1{font-size:30px;text-transform:uppercase;letter-spacing:4px;color:#3b82f6;font-weight:700;margin-bottom:6px}
+.page-header .sub{font-size:12px;color:#888;letter-spacing:4px;text-transform:uppercase}
+
+/* KPI Cards */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;max-width:1300px;margin:0 auto 35px auto}
+.kpi-card{background:linear-gradient(135deg,#252525 0%,#1f1f1f 100%);border-radius:12px;padding:20px;border-left:4px solid #3b82f6;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+.kpi-card.verde{border-left-color:#22c55e}
+.kpi-card.amarelo{border-left-color:#eab308}
+.kpi-card.vermelho{border-left-color:#ef4444}
+.kpi-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#888;margin-bottom:8px}
+.kpi-valor{font-size:32px;font-weight:700;color:#fff;line-height:1}
+.kpi-detalhe{font-size:12px;color:#666;margin-top:6px}
+
+/* Divisores de seção */
+.section-divider{max-width:1300px;margin:45px auto 25px auto;padding-bottom:12px;border-bottom:2px solid #2a2a2a;display:flex;align-items:center;gap:12px}
+.section-divider h2{font-size:18px;text-transform:uppercase;letter-spacing:3px;font-weight:700}
+.section-divider.corretivas h2{color:#3b82f6}
+.section-divider.preventivas h2{color:#ef4444}
+
+/* Blocos */
+.bloco{max-width:1300px;margin:0 auto 25px auto}
+.bloco-header{padding:10px 18px;border-radius:8px;margin-bottom:12px;font-weight:600;font-size:14px;display:flex;align-items:center;gap:10px;letter-spacing:1px}
+.bloco-verde{background:rgba(34,197,94,.12);color:#22c55e;border-left:3px solid #22c55e}
+.bloco-amarelo{background:rgba(234,179,8,.12);color:#eab308;border-left:3px solid #eab308}
+.bloco-vermelho{background:rgba(239,68,68,.12);color:#ef4444;border-left:3px solid #ef4444}
+.bloco-contador{margin-left:auto;font-size:12px;background:rgba(255,255,255,.08);padding:3px 12px;border-radius:12px;color:#ccc}
+
+/* Tabela */
+.tabela{width:100%;background:#202020;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.3);margin-bottom:8px}
+.tabela table{width:100%;border-collapse:collapse}
+.tabela th{background:#2a2a2a;padding:11px 16px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#999;font-weight:600}
+.tabela th.center{text-align:center}
+.tabela td{padding:10px 16px;font-size:13px;border-top:1px solid #2a2a2a}
+.tabela tr:hover{background:#252525}
+.tabela td.center{text-align:center}
+.tabela td.nome{font-weight:600;color:#eee}
+
+/* Barra de progresso */
+.progress-wrap{display:flex;align-items:center;gap:10px;min-width:110px}
+.progress-bar{flex:1;height:8px;background:#2a2a2a;border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;border-radius:4px;transition:width .3s}
+.progress-fill.verde{background:#22c55e}
+.progress-fill.amarelo{background:#eab308}
+.progress-fill.vermelho{background:#ef4444}
+.progress-num{font-size:12px;font-weight:700;min-width:38px;text-align:right}
+.progress-num.verde{color:#22c55e}
+.progress-num.amarelo{color:#eab308}
+.progress-num.vermelho{color:#ef4444}
+
+/* Rodapé */
+.rodape{text-align:center;margin-top:50px;padding-top:25px;border-top:1px solid #2a2a2a;color:#555;font-size:11px;letter-spacing:3px;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>👤 Cristiano</h1>
+  <div class="sub">Setembro/26 • Detalhamento por Prestador</div>
+</div>
+
+<div id="conteudo"></div>
+
+<div class="rodape">Dashboard de Chamados • Subgerentes • Setembro/26</div>
+
+<script>
+function corPct(p){ if(p>=90) return 'verde'; if(p>=50) return 'amarelo'; return 'vermelho'; }
+function renderTabela(lista){
+  var html='<div class="tabela"><table><thead><tr><th>Prestador</th><th class="center">Total</th><th class="center">Em Atend.</th><th class="center">Fechados</th><th>Conclusão</th></tr></thead><tbody>';
+  for(var i=0;i<lista.length;i++){
+    var d=lista[i];
+    var cor=corPct(d[4]);
+    html+='<tr><td class="nome">'+d[0]+'</td><td class="center">'+d[1]+'</td><td class="center">'+d[2]+'</td><td class="center">'+d[3]+'</td>';
+    html+='<td><div class="progress-wrap"><div class="progress-bar"><div class="progress-fill '+cor+'" style="width:'+d[4]+'%"></div></div><span class="progress-num '+cor+'">'+d[4]+'%</span></div></td></tr>';
+  }
+  return html+'</tbody></table></div>';
+}
+function separar(lista){
+  var v=[],a=[],r=[];
+  for(var i=0;i<lista.length;i++){
+    var d=lista[i];
+    if(d[4]>=90) v.push(d);
+    else if(d[4]>=50) a.push(d);
+    else r.push(d);
+  }
+  return {v:v,a:a,r:r};
+}
+function bloco(titulo,cls,lista){
+  if(lista.length===0) return '';
+  var cont=lista.length===1?'1 prestador':lista.length+' prestadores';
+  return '<div class="bloco"><div class="bloco-header '+cls+'">'+titulo+'<span class="bloco-contador">'+cont+'</span></div>'+renderTabela(lista)+'</div>';
+}
+function kpiCard(label,valor,detalhe,cor){
+  return '<div class="kpi-card '+cor+'"><div class="kpi-label">'+label+'</div><div class="kpi-valor">'+valor+'</div><div class="kpi-detalhe">'+detalhe+'</div></div>';
+}
+
+var corr=[['JOEL GERADORES',6,0,6,100],['GLAUCO MARTINS DA SILVA',4,0,4,100],['INOVE TRANSPORTES',3,0,3,100],['NSC EXTRAS',3,0,3,100],['ANNE PCM',1,0,1,100],['CRISTIANO SUBGERENTE ITAJAÍ MANUT.',1,0,1,100],['GRUPO SOMA',1,0,1,100],['RDL CARRINHOS',1,0,1,100],['ROBERTA BONOTTO',1,0,1,100],['SAS EMPILHADEIRAS',30,2,28,93],['RF ROBSOM REFRIGERAÇÃO 1',14,1,13,93],['AMARAL PREDIAL TUBAÇÃO',110,10,100,91],['EVERTON REGIONAL MANUTENÇÃO',29,3,26,90],['ABMAEL CLIMATIZAÇÃO',19,2,17,89],['RF ROBSOM REFRIGERAÇÃO 2',25,4,21,84],['AIRTON ESTERAS',6,1,5,83],['LUCIANO CADEIRAS',6,1,5,83],['TIAGO EMBALADORAS',4,1,3,75],['LEONARDO PREDIAL',37,10,27,73],['TECLEAN',10,3,7,70],['FROTA BEBEDOUROS',3,1,2,67],['NSC ELÉTRICA',63,26,37,59],['RODRIGO VIDROS',6,3,3,50],['COLDSERV MANUTENÇÃO',4,2,2,50],['TIAGO NEHRING',2,1,1,50],['TRANSPOTECH EMPILHADEIRAS BLUMENAU',2,1,1,50],['JHONATHAN BITTENCOURT REFRIGERAÇÃO',7,4,3,43],['DM SERRALHERIA',19,11,8,42],['ROLOMATIC BIPS',3,2,1,33],['ALEMÃO CALHAS SUL',14,11,3,21],['CRISTIANO PALETEIRAS CD',5,5,0,0],['TIJUELETRO ELÉTRICA',4,4,0,0],['AMANDA PCM',3,3,0,0],['MANTEC',2,2,0,0],['PLANEJADOS TIJUCAS',2,2,0,0],['ALEMÃO CALHAS NORTE',1,1,0,0]];
+var prev=[['AMARAL PREDIAL TUBAÇÃO',39,0,39,100],['ROBSOM PREVENTIVAS',28,0,28,100],['ABMAEL CLIMATIZAÇÃO',27,0,27,100],['INOVE TRANSPORTES',16,0,16,100],['JHONATHAN BITTENCOURT REFRIGERAÇÃO',3,0,3,100],['RDL CARRINHOS',15,4,11,73],['LEONARDO PREDIAL',20,6,14,70],['EVERTON REGIONAL MANUTENÇÃO',23,8,15,65],['MATEUS PCM',1,1,0,0],['RUDINEI NOBREAKS',1,1,0,0]];
+
+var html='';
+
+/* KPIs Corretivas */
+var totC=451, fechC=334, atenC=117, pctC=74;
+html+='<div class="section-divider corretivas"><h2>🔧 Corretivas</h2></div>';
+html+='<div class="kpi-grid">';
+html+=kpiCard('Total de Chamados',totC,'Corretivas em Setembro','');
+html+=kpiCard('Fechados',fechC,'Concluídos','verde');
+html+=kpiCard('Em Atendimento',atenC,'Pendentes','amarelo');
+html+=kpiCard('% Conclusão',pctC+'%','Meta: 90%','vermelho');
+html+='</div>';
+
+var c=separar(corr);
+html+=bloco('🏆 Destaques (≥ 90%)','bloco-verde',c.v);
+html+=bloco('⚠️ Atenção (50-89%)','bloco-amarelo',c.a);
+html+=bloco('🚨 Críticos (abaixo de 50%)','bloco-vermelho',c.r);
+
+/* KPIs Preventivas */
+var totP=173, fechP=154, atenP=19, pctP=89;
+html+='<div class="section-divider preventivas" style="margin-top:60px"><h2>🛡️ Preventivas</h2></div>';
+html+='<div class="kpi-grid">';
+html+=kpiCard('Total de Chamados',totP,'Preventivas em Setembro','');
+html+=kpiCard('Fechados',fechP,'Concluídos','verde');
+html+=kpiCard('Em Atendimento',atenP,'Pendentes','amarelo');
+html+=kpiCard('% Conclusão',pctP+'%','Meta: 90%','verde');
+html+='</div>';
+
+var p=separar(prev);
+html+=bloco('🏆 Destaques (≥ 90%)','bloco-verde',p.v);
+html+=bloco('⚠️ Atenção (50-89%)','bloco-amarelo',p.a);
+html+=bloco('🚨 Críticos (abaixo de 50%)','bloco-vermelho',p.r);
+
+document.getElementById('conteudo').innerHTML=html;
+</script>
+
+</body>
+</html>
